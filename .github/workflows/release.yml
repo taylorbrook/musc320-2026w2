@@ -1,0 +1,44 @@
+# Build musc320-<tag>.zip from main and attach it to the release <tag>.
+# Run by hand only (Actions tab, or: gh workflow run release.yml -f tag=wk03).
+# The release and its tag are created once and never moved. For errata, fix
+# the file on main and run this again: --clobber replaces the zip, so the
+# download URL stays the same.
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "setup or wk01..wk13"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - name: Build and upload the zip
+        # The tag reaches the shell only through env; build_release.sh
+        # validates it before any other use.
+        env:
+          TAG: ${{ inputs.tag }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 .github/scripts/check_repo.py --tree
+          bash .github/scripts/build_release.sh "$TAG"
+          if ! gh release view "$TAG" > /dev/null 2>&1; then
+            gh release create "$TAG" --target main --latest=false \
+              --title "$TAG" \
+              --notes "Course files for $TAG. Errata replace the zip on this same tag, so the download link does not change."
+          fi
+          gh release upload "$TAG" "musc320-$TAG.zip" --clobber

@@ -1,0 +1,46 @@
+# Lint every push, pull request and manual run; deploy Pages from main only
+# after the lint passes. Pull requests run with a read-only token and no
+# secrets, and never deploy.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Leak guard and patch lint
+        run: python3 .github/scripts/check_repo.py --tree
+      - name: Leak guard self-test
+        run: python3 .github/scripts/check_repo.py --self-test
+
+  pages:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: '.'
+      - id: deployment
+        uses: actions/deploy-pages@v5
