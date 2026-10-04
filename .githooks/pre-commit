@@ -1,0 +1,17 @@
+#!/bin/sh
+# MUSC 320 course repo pre-commit hook: refuse a leak before the commit exists.
+# Enabled per clone with: git config core.hooksPath .githooks
+set -e
+
+python3 .github/scripts/check_repo.py --staged
+
+# Optional private extension: a local, unpushed git config value naming an
+# executable on the instructor's machine. Unset in every student clone.
+ext="$(git config --get musc320.privateCheck || true)"
+if [ -n "$ext" ]; then
+  if [ ! -x "$ext" ]; then
+    echo "CHECK FAIL: musc320.privateCheck is set but not executable: $ext" >&2
+    exit 1
+  fi
+  exec "$ext"
+fi
