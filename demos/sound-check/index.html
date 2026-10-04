@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--
+  MUSC 320 / sound-check (slug: sound-check)
+  The browser sound check. It proves three things before the web unit starts:
+  your browser plays Web Audio, your left and right channels are wired the right
+  way round, and the course's hearing-safety limiter sits on the output.
+
+  On Start it plays a short, soft major-ninth figure (C E G B D, an arpeggio
+  then the held chord) three times: in the left ear, in the right ear, then in
+  both. A level meter shows the output, and the status line names each stage.
+  Every exercise in this course makes music from minute one, so this plays a
+  chord, never a bare test tone.
+
+  Embedded on the Canvas Software Setup page through {{demo:sound-check}} and
+  linked as the web-unit preflight (D-56). Built on the vendored Tone.js and
+  tone-shell.js (limiter plus gesture start); classic scripts only, so it runs
+  from the repo folder as well as from GitHub Pages. Audio NEVER starts on
+  load: the Start button calls Tone.start() (ToneShell.start).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MUSC 320: browser sound check</title>
+<link rel="stylesheet" href="../_shared/shell.css">
+<script src="../_shared/vendor/Tone.js"></script>
+<script src="../_shared/tone-shell.js"></script>
+<style>
+  .meter { max-width: 320px; margin-top: 14px; }
+</style>
+</head>
+<body>
+<main class="demo">
+  <h1>Browser sound check</h1>
+  <p class="instructions">
+    Turn your volume low, then press Start. You should hear a short chord in your
+    <strong>left</strong> ear, then your <strong>right</strong> ear, then <strong>both</strong>.
+  </p>
+
+  <div class="row">
+    <button id="start" class="start" type="button">Start</button>
+    <button id="again" type="button" disabled>Play again</button>
+  </div>
+
+  <div class="meter">
+    <div class="k">Output level</div>
+    <div><span class="v" id="level">-60</span> <span class="u">dB</span></div>
+    <div class="bar" aria-hidden="true"><span id="bar"></span></div>
+  </div>
+
+  <p class="status" id="status" role="status" aria-live="polite">Audio is off. Press Start.</p>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  var NOTES = ["C4", "E4", "G4", "B4", "D5"];   // a major-ninth chord
+  var STAGES = [
+    { pan: -1, key: "left",  text: "Left: you should hear the chord in your left ear." },
+    { pan: 1,  key: "right", text: "Right: now in your right ear." },
+    { pan: 0,  key: "both",  text: "Both: now in both ears." }
+  ];
+  var STAGE_GAP = 2.2;    // seconds between stages
+  var ARP_STEP = 0.12;    // seconds between arpeggio notes
+  var FLOOR_DB = -60;
+
+  var startBtn = document.getElementById("start");
+  var againBtn = document.getElementById("again");
+  var statusEl = document.getElementById("status");
+  var levelEl = document.getElementById("level");
+  var barEl = document.getElementById("bar");
+
+  var state = { stage: "idle", runs: 0 };
+  window.soundCheck = state;
+
+  var synth = null, panner = null, meter = null, playing = false;
+
+  function build() {
+    ToneShell.connect();
+    panner = new Tone.Panner(0).toDestination();
+    synth = new Tone.PolySynth(Tone.Synth, {
+      oscillator: { type: "triangle" },
+      envelope: { attack: 0.03, decay: 0.2, sustain: 0.5, release: 0.4 },
+      volume: -18
+    }).connect(panner);
+    meter = new Tone.Meter();
+    synth.connect(meter);
+    requestAnimationFrame(drawMeter);
+  }
+
+  function drawMeter() {
+    var db = meter.getValue();
+    if (typeof db !== "number" || !isFinite(db) || db < FLOOR_DB) db = FLOOR_DB;
+    if (db > 0) db = 0;
+    levelEl.textContent = db <= FLOOR_DB ? "-60" : db.toFixed(0);
+    barEl.style.width = ((db - FLOOR_DB) / -FLOOR_DB * 100).toFixed(1) + "%";
+    requestAnimationFrame(drawMeter);
+  }
+
+  function setStage(key, text) {
+    state.stage = key;
+    statusEl.textContent = text;
+  }
+
+  function play() {
+    if (playing) return;
+    playing = true;
+    againBtn.disabled = true;
+    state.runs += 1;
+    var t0 = Tone.now() + 0.1;
+    STAGES.forEach(function (stage, i) {
+      var base = t0 + i * STAGE_GAP;
+      panner.pan.setValueAtTime(stage.pan, base);
+      NOTES.forEach(function (note, k) {
+        synth.triggerAttackRelease(note, 0.5, base + k * ARP_STEP);
+      });
+      synth.triggerAttackRelease(NOTES, 0.9, base + NOTES.length * ARP_STEP + 0.12);
+      Tone.getDraw().schedule(function () { setStage(stage.key, stage.text); }, base);
+    });
+    var end = t0 + (STAGES.length - 1) * STAGE_GAP + 2.1;
+    Tone.getDraw().schedule(function () {
+      setStage("done", "Done. If you heard left, right and both, your browser audio works.");
+      playing = false;
+      againBtn.disabled = false;
+    }, end);
+  }
+
+  startBtn.addEventListener("click", function () {
+    startBtn.disabled = true;
+    setStage("starting", "Starting audio...");
+    ToneShell.start(function () {
+      if (!synth) build();
+      play();
+    });
+  });
+
+  againBtn.addEventListener("click", play);
+})();
+</script>
+</body>
+</html>
