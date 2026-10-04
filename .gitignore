@@ -1,0 +1,21 @@
+# Operating system and editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+node_modules/
+
+# Your own work: everything in my-work/ except the placeholder
+my-work/*
+!my-work/.gitkeep
+
+# Unity caches. These patterns match at any depth, so no course folder
+# may be named library, temp, obj or logs (in any letter case).
+**/[Ll]ibrary/
+**/[Tt]emp/
+**/[Oo]bj/
+**/[Ll]ogs/
+**/[Uu]ser[Ss]ettings/
+*.csproj
+*.sln
