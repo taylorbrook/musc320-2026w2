@@ -112,6 +112,13 @@
     statusEl.textContent = text;
   }
 
+  // Run fn when the audio clock reaches time. A plain timer: browsers may
+  // delay it in a hidden tab or an off-screen iframe but never drop it,
+  // whereas Tone's Draw scheduler discards callbacks that arrive late.
+  function atAudioTime(time, fn) {
+    window.setTimeout(fn, Math.max(0, (time - Tone.now()) * 1000));
+  }
+
   function play() {
     if (playing) return;
     playing = true;
@@ -125,14 +132,14 @@
         synth.triggerAttackRelease(note, 0.5, base + k * ARP_STEP);
       });
       synth.triggerAttackRelease(NOTES, 0.9, base + NOTES.length * ARP_STEP + 0.12);
-      Tone.getDraw().schedule(function () { setStage(stage.key, stage.text); }, base);
+      atAudioTime(base, function () { setStage(stage.key, stage.text); });
     });
     var end = t0 + (STAGES.length - 1) * STAGE_GAP + 2.1;
-    Tone.getDraw().schedule(function () {
+    atAudioTime(end, function () {
       setStage("done", "Done. If you heard left, right and both, your browser audio works.");
       playing = false;
       againBtn.disabled = false;
-    }, end);
+    });
   }
 
   startBtn.addEventListener("click", function () {
@@ -141,6 +148,9 @@
     ToneShell.start(function () {
       if (!synth) build();
       play();
+    }).catch(function () {
+      startBtn.disabled = false;
+      setStage("idle", "Audio could not start. Press Start again.");
     });
   });
 
