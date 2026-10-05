@@ -37,6 +37,6 @@ Download it again each week, and keep your own work outside the unzipped folder.
 
 ## More help
 
-The step-by-step setup, with screenshots, is on the Canvas Software Setup page.
+The step-by-step setup is on the Canvas Software Setup page.
 
 Every audio, image or video file here is CC0 or recorded for this course. The list is in `MEDIA.md`.
