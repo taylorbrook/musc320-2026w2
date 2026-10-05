@@ -39,6 +39,9 @@ Rule ids:
   unmerged        an unmerged (conflicted) index entry; the index is never
                   passed unless every entry in it was read
   m320-missing    a Max file uses an m320 abstraction that is not in its own folder
+  m320-drift      a copy of an m320 abstraction outside setup/ that differs from
+                  setup/ (byte equality: line endings and whitespace count), or
+                  that has no setup/ counterpart
 
 Accumulate every finding and exit once, so one run hands back the whole fix
 list. Output: "REPO: <path>: <rule>: <detail>" lines on stderr, then
@@ -437,11 +440,13 @@ def _in_folder(folder, name):
 
 
 def check_m320(index, paths, size_cap=SIZE_CAP):
-    """m320-missing findings for the Max files in ``paths``.
+    """m320-missing findings for the Max files in ``paths``; m320-drift for every copy.
 
     Each patch folder must hold a copy of every m320 abstraction its Max files
-    use, so a patch opens with no search-path setup. Files that are not JSON
-    are left to maxpat-json; oversize files are left to the size rule.
+    use, so a patch opens with no search-path setup. Every m320.*.maxpat
+    outside setup/ must be byte-identical to setup/<same name>, so a fix made
+    in setup/ cannot leave a stale copy behind. Files that are not JSON are
+    left to maxpat-json; oversize files are left to the size rule.
     """
     failures = {}
     for path in paths:
@@ -459,6 +464,22 @@ def check_m320(index, paths, size_cap=SIZE_CAP):
                     "m320-missing",
                     f"uses {name} but {name}.maxpat is not in this folder; copy it from setup/",
                 ))
+    for path in index.paths():
+        base = path.rpartition("/")[2]
+        if not (base.startswith("m320.") and base.endswith(".maxpat")):
+            continue
+        if _folder(path) == M320_CANONICAL_DIR:
+            continue
+        canonical = M320_CANONICAL_DIR + "/" + base
+        if canonical not in index:
+            detail = "no setup/ counterpart; copy abstractions from setup/ only"
+        elif index.size(path) > size_cap or index.size(canonical) > size_cap:
+            continue
+        elif hashlib.sha256(index.read(path)).digest() != hashlib.sha256(index.read(canonical)).digest():
+            detail = f"differs from {canonical}; copy it again from setup/"
+        else:
+            continue
+        failures.setdefault(path, []).append(("m320-drift", detail))
     return failures
 
 
@@ -580,6 +601,8 @@ def _self_test_files():
         # straight into the index.
         "unmerged": ("seed/conflict.txt", b"base\n"),
         "m320-missing": ("seed3/uses.maxpat", _patch_json(9, _box("m320.synth~")).encode("utf-8")),
+        # Differs from the control's setup/ file by one trailing newline only.
+        "m320-drift": ("seed4/m320.out~.maxpat", _patch_json(9, {"boxes": []}).encode("utf-8") + b"\n"),
     }
     control = {
         ".gitattributes": b"* text=auto eol=lf\n*.wav binary\n",
@@ -594,6 +617,11 @@ def _self_test_files():
                           f"| ok.js | 1.0.0 | {hashlib.sha256(vendor_ok).hexdigest()} | self-test |\n"
                           f"| bad.js | 1.0.0 | {hashlib.sha256(b'other').hexdigest()} | self-test |\n"
                           ).encode("utf-8"),
+        # A canonical abstraction, a byte-identical copy, and a patch using it.
+        "setup/m320.out~.maxpat": _patch_json(9).encode("utf-8"),
+        "control2/m320.out~.maxpat": _patch_json(9).encode("utf-8"),
+        "control2/uses.maxpat": _patch_json(9, {"boxes": [{"box": {
+            "id": "obj-1", "maxclass": "bpatcher", "name": "m320.out~.maxpat"}}]}).encode("utf-8"),
     }
     return seeds, control
 
