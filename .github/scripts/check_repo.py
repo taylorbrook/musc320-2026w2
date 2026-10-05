@@ -7,7 +7,9 @@ becomes public; CI is the backstop.
 
 Modes (exactly one):
   --staged     the hook: scan the staged index blobs, never the working tree,
-               so an unstaged edit can neither fail nor pass a commit.
+               so an unstaged edit can neither fail nor pass a commit. Added,
+               copied, modified, renamed and type-changed paths are all read,
+               so a symlink replaced by a regular file is scanned too.
   --tree       CI: scan every tracked file, read from the index.
   --self-test  CI: build one seeded violator per rule in a temporary git repo
                at runtime, scan it in both modes, and prove every rule fires
@@ -115,8 +117,13 @@ def _split_z(out):
     return [p.decode("utf-8", errors="surrogateescape") for p in out.split(b"\0") if p]
 
 
-def staged_paths(cwd=None, env=None, diff_filter="ACMR"):
-    """Paths changed in the index (added, copied, modified or renamed by default)."""
+def staged_paths(cwd=None, env=None, diff_filter="ACMRT"):
+    """Paths changed in the index.
+
+    By default: added, copied, modified, renamed or type-changed (a symlink
+    replaced by a regular file, or the reverse). Leaving type changes out would
+    let new content into a commit without being read.
+    """
     args = ["diff", "--cached", "--name-only", "-z"]
     if diff_filter:
         args.append("--diff-filter=" + diff_filter)
@@ -407,10 +414,11 @@ def check_tree(cwd=None, env=None, size_cap=SIZE_CAP):
 def check_staged(cwd=None, env=None, size_cap=SIZE_CAP):
     """{path: findings} for the staged index, and the file count.
 
-    Per-file rules cover the added, copied, modified or renamed paths. The
-    whole-repo rules rerun over the full index whenever their inputs change:
-    every media file when MEDIA.md is staged (or deleted), and the vendor check
-    when VENDOR.md or anything under demos/_shared/vendor/ is staged.
+    Per-file rules cover the added, copied, modified, renamed or type-changed
+    paths. The whole-repo rules rerun over the full index whenever their
+    inputs change: every media file when MEDIA.md is staged (or deleted), and
+    the vendor check when VENDOR.md or anything under demos/_shared/vendor/ is
+    staged.
     """
     index = Index(cwd, env)
     paths = [p for p in staged_paths(cwd, env) if p in index]
