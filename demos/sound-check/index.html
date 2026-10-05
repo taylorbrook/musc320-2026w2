@@ -49,6 +49,7 @@
   </div>
 
   <p class="status" id="status" role="status" aria-live="polite">Audio is off. Press Start.</p>
+  <p class="note" id="limiter">Limiter: starts with audio</p>
 </main>
 
 <script>
@@ -70,14 +71,22 @@
   var statusEl = document.getElementById("status");
   var levelEl = document.getElementById("level");
   var barEl = document.getElementById("bar");
+  var limiterEl = document.getElementById("limiter");
 
-  var state = { stage: "idle", runs: 0 };
+  var state = { stage: "idle", runs: 0, limiter: "pending" };
   window.soundCheck = state;
 
   var synth = null, panner = null, meter = null, playing = false;
 
   function build() {
-    ToneShell.connect();
+    ToneShell.connect();   // a stereo page: no options
+    if (ToneShell.limiter) {
+      limiterEl.textContent = "Limiter: on";
+      state.limiter = "on";
+    } else {
+      limiterEl.textContent = "Limiter: OFF (multichannel output)";
+      state.limiter = "off";
+    }
     panner = new Tone.Panner(0).toDestination();
     synth = new Tone.PolySynth(Tone.Synth, {
       oscillator: { type: "triangle" },

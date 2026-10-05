@@ -18,9 +18,17 @@
         mirror shell.js connectMaster exactly: threshold -3 dBFS, ratio 20,
         hard knee 0, attack 0.003 s, release 0.08 s. Do not swap in
         Tone.Limiter (release 0.01) or Tone's default knee (30).
-        BYPASS (adds nothing, returns null) when opts.bypassLimiter === true or
-        the destination has more than two channels, so multichannel demos are
-        never folded down to stereo by the stereo-only compressor.
+        BYPASS (adds nothing, returns null) only when the demo itself asks:
+          opts.bypassLimiter === true   the demo opts out of the limiter
+          opts.multichannel === true    the demo declares multichannel output
+          or Tone.getDestination().channelCount is above 2, a channel count
+          the demo raised itself before calling connect().
+        The bypass keys on the demo's declared output layout. The output
+        device's channel capacity is never consulted: a stereo graph never
+        reaches a device's extra outputs, so the stereo compressor folds
+        nothing down, and a stereo demo on a 4-out interface, an aggregate
+        device or the 8-channel room keeps its limiter. Only a demo that
+        really sends more than two channels skips the stereo-only compressor.
 
     ToneShell.start(onReady)
         Call this FROM INSIDE the Start button's own click handler. The click
@@ -38,10 +46,12 @@
     limiter: null,
     started: false,
 
-    // ---- master safety limiter (with multichannel bypass) ----
+    // ---- master safety limiter (bypassed only for declared multichannel) ----
     connect: function (opts) {
       var dest = Tone.getDestination();
-      if ((opts && opts.bypassLimiter) || dest.maxChannelCount > 2) return null;
+      var optOut = !!(opts && opts.bypassLimiter);
+      var multichannel = !!(opts && opts.multichannel) || dest.channelCount > 2;
+      if (optOut || multichannel) return null;
       var lim = new Tone.Compressor({
         threshold: -3,
         ratio: 20,
