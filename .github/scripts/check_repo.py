@@ -13,8 +13,9 @@ Modes (exactly one):
   --tree       CI: scan every tracked file, read from the index.
   --self-test  CI: build one seeded violator per rule in a temporary git repo
                at runtime, scan it in both modes, and prove every rule fires
-               on its seed while a clean control passes. No seed is ever
-               written into this repo or its history.
+               on its seed while a clean control passes. A second temporary
+               repo proves a staged type change (symlink replaced by a file)
+               is read. No seed is ever written into this repo or its history.
 
 Rule ids:
   sentinel        a file carrying the instructor-only sentinel
@@ -35,6 +36,8 @@ Rule ids:
   vendor-hash     a file in demos/_shared/vendor/ missing from VENDOR.md, or
                   whose sha256 differs from its row
   cdn-script      an HTML script loaded from http:, https: or //
+  unmerged        an unmerged (conflicted) index entry; the index is never
+                  passed unless every entry in it was read
 
 Accumulate every finding and exit once, so one run hands back the whole fix
 list. Output: "REPO: <path>: <rule>: <detail>" lines on stderr, then
@@ -142,14 +145,23 @@ class Index:
         self.cwd = cwd
         self.env = env
         self.oids = {}
+        unmerged = set()
         for entry in run_git(["ls-files", "-s", "-z"], cwd=cwd, env=env).split(b"\0"):
             if not entry:
                 continue
             meta, path = entry.split(b"\t", 1)
-            mode, oid, _stage = meta.split()
+            mode, oid, stage = meta.split()
+            name = path.decode("utf-8", errors="surrogateescape")
+            if stage != b"0":
+                unmerged.add(name)
             if mode == b"160000":  # a submodule link, not a blob
                 continue
-            self.oids[path.decode("utf-8", errors="surrogateescape")] = oid.decode("ascii")
+            self.oids[name] = oid.decode("ascii")
+        # Paths with stage 1, 2 or 3 entries: a merge left unfinished. git
+        # normally refuses a commit with unmerged paths before any hook runs, so
+        # reporting them is defence in depth: a scanner never passes an index
+        # it did not fully read.
+        self.unmerged = sorted(unmerged)
         self.sizes = {}
         if self.oids:
             oids = sorted(set(self.oids.values()))
@@ -401,11 +413,20 @@ def scan_paths(index, paths, size_cap):
     return failures
 
 
+UNMERGED_DETAIL = "unmerged index entry; finish or abort the merge before committing"
+
+
+def check_unmerged(index):
+    """unmerged findings for every path with a stage 1, 2 or 3 index entry."""
+    return {path: [("unmerged", UNMERGED_DETAIL)] for path in index.unmerged}
+
+
 def check_tree(cwd=None, env=None, size_cap=SIZE_CAP):
     """{path: findings} for every tracked file, and the file count."""
     index = Index(cwd, env)
     paths = index.paths()
     failures = scan_paths(index, paths, size_cap)
+    _merge(failures, check_unmerged(index))
     _merge(failures, check_media(index, paths))
     _merge(failures, check_vendor(index))
     return failures, len(paths)
@@ -415,15 +436,16 @@ def check_staged(cwd=None, env=None, size_cap=SIZE_CAP):
     """{path: findings} for the staged index, and the file count.
 
     Per-file rules cover the added, copied, modified, renamed or type-changed
-    paths. The whole-repo rules rerun over the full index whenever their
-    inputs change: every media file when MEDIA.md is staged (or deleted), and
-    the vendor check when VENDOR.md or anything under demos/_shared/vendor/ is
-    staged.
+    paths. Every unmerged entry is a finding. The whole-repo rules rerun
+    over the full index whenever their inputs change: every media file when
+    MEDIA.md is staged (or deleted), and the vendor check when VENDOR.md or
+    anything under demos/_shared/vendor/ is staged.
     """
     index = Index(cwd, env)
     paths = [p for p in staged_paths(cwd, env) if p in index]
     changed = set(staged_paths(cwd, env, diff_filter=""))
     failures = scan_paths(index, paths, size_cap)
+    _merge(failures, check_unmerged(index))
     media = index.paths() if MEDIA_REGISTER in changed else paths
     _merge(failures, check_media(index, media))
     if any(p.startswith(VENDOR_DIR) for p in changed):
@@ -478,6 +500,9 @@ def _self_test_files():
         "vendor-hash": (VENDOR_DIR + "bad.js", vendor_bad),
         "cdn-script": ("seed/index.html",
                        b'<!doctype html><script src="https://cdn.example.com/x.js"></script>\n'),
+        # Never written to disk: self_test puts stage 1, 2 and 3 entries for it
+        # straight into the index.
+        "unmerged": ("seed/conflict.txt", b"base\n"),
     }
     control = {
         ".gitattributes": b"* text=auto eol=lf\n*.wav binary\n",
@@ -496,8 +521,51 @@ def _self_test_files():
     return seeds, control
 
 
+def _hash_blob(data, cwd, env):
+    """Write ``data`` into the object store of the repo at ``cwd``; return its id."""
+    return run_git(["hash-object", "-w", "--stdin"], cwd=cwd, env=env, stdin=data).decode("ascii").strip()
+
+
+def _stage_unmerged(path, base, cwd, env):
+    """Put stage 1, 2 and 3 entries for ``path`` in the index, as a conflicted merge leaves it."""
+    lines = []
+    for stage, data in ((1, base), (2, b"ours\n"), (3, b"theirs\n")):
+        lines.append(f"100644 {_hash_blob(data, cwd, env)} {stage}\t{path}\n")
+    run_git(["update-index", "--index-info"], cwd=cwd, env=env, stdin="".join(lines).encode("utf-8"))
+
+
+TYPECHANGE_SEED = "seed/link.maxpat"
+
+
+def _self_test_typechange(env):
+    """Problems found proving that --staged reads a staged type change (symlink to file)."""
+    with tempfile.TemporaryDirectory(prefix="check-repo-self-test-") as tmp:
+        run_git(["init", "-q"], cwd=tmp, env=env)
+        oid = _hash_blob(b"../shared/patch.maxpat", tmp, env)
+        run_git(["update-index", "--add", "--cacheinfo", f"120000,{oid},{TYPECHANGE_SEED}"],
+                cwd=tmp, env=env)
+        # Explicit identity and signing flags: the CI runner has neither.
+        run_git(["-c", "user.name=check_repo self-test", "-c", "user.email=self-test@example.invalid",
+                 "-c", "commit.gpgsign=false", "commit", "-q", "--no-verify", "-m", "symlink"],
+                cwd=tmp, env=env)
+        full = os.path.join(tmp, *TYPECHANGE_SEED.split("/"))
+        os.makedirs(os.path.dirname(full), exist_ok=True)
+        body = _patch_json(9, dict(_box("sfplay~ /Users/x/a.wav"), comment="draft " + SENTINEL))
+        with open(full, "wb") as fh:
+            fh.write(body.encode("utf-8"))
+        run_git(["add", "--", TYPECHANGE_SEED], cwd=tmp, env=env)
+        status = run_git(["diff", "--cached", "--name-status"], cwd=tmp, env=env).decode("utf-8")
+        if "T\t" + TYPECHANGE_SEED not in status.splitlines():
+            return ["type-change seed was not built"]
+        failures, _count = check_staged(cwd=tmp, env=env)
+        if "sentinel" not in {r for r, _d in failures.get(TYPECHANGE_SEED, [])}:
+            return [f"--staged: type-change seed {TYPECHANGE_SEED} not rejected"]
+    return []
+
+
 def self_test():
-    """Exit code 0 only when every rule fires on its seed and the control is clean."""
+    """Exit code 0 only when every rule fires on its seed, the type-change seed
+    is refused, and the control is clean."""
     seeds, control = _self_test_files()
     env = dict(os.environ)
     env["GIT_CONFIG_GLOBAL"] = os.devnull
@@ -506,9 +574,10 @@ def self_test():
         env.pop(var, None)
     size_cap = 1024
     problems = []
+    unmerged_path, unmerged_base = seeds["unmerged"]
     with tempfile.TemporaryDirectory(prefix="check-repo-self-test-") as tmp:
         files = dict(control)
-        files.update({path: data for path, data in seeds.values()})
+        files.update({path: data for path, data in seeds.values() if path != unmerged_path})
         for rel, data in files.items():
             full = os.path.join(tmp, *rel.split("/"))
             os.makedirs(os.path.dirname(full), exist_ok=True)
@@ -516,6 +585,7 @@ def self_test():
                 fh.write(data)
         run_git(["init", "-q"], cwd=tmp, env=env)
         run_git(["add", "--all"], cwd=tmp, env=env)
+        _stage_unmerged(unmerged_path, unmerged_base, tmp, env)
         for name, check in (("--tree", check_tree), ("--staged", check_staged)):
             failures, _count = check(cwd=tmp, env=env, size_cap=size_cap)
             for rule, (path, _data) in sorted(seeds.items()):
@@ -524,6 +594,7 @@ def self_test():
             for path in sorted(control):
                 for rule, detail in failures.get(path, []):
                     problems.append(f"{name}: control {path} flagged by {rule}: {detail}")
+    problems += _self_test_typechange(env)
     if problems:
         for problem in problems:
             print(f"SELF-TEST: {problem}", file=sys.stderr)
@@ -531,7 +602,7 @@ def self_test():
         print(f"SELF-TEST FAIL: {len(problems)} problem(s); rules not proven: "
               f"{', '.join(missing) or 'none'}.", file=sys.stderr)
         return 1
-    print(f"SELF-TEST PASS: {len(seeds)} violators rejected, control clean.")
+    print(f"SELF-TEST PASS: {len(seeds)} violators rejected, type-change seed refused, control clean.")
     return 0
 
 
