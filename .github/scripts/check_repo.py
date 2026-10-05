@@ -38,6 +38,7 @@ Rule ids:
   cdn-script      an HTML script loaded from http:, https: or //
   unmerged        an unmerged (conflicted) index entry; the index is never
                   passed unless every entry in it was read
+  m320-missing    a Max file uses an m320 abstraction that is not in its own folder
 
 Accumulate every finding and exit once, so one run hands back the whole fix
 list. Output: "REPO: <path>: <rule>: <detail>" lines on stderr, then
@@ -101,6 +102,11 @@ HTML_SUFFIXES = (".html", ".htm")
 CDN_SCRIPT_RE = re.compile(
     r"<script\b[^>]*?\bsrc\s*=\s*[\"']?\s*(https?:|//)", re.IGNORECASE,
 )
+
+# Course abstractions: an object name, a poly~ voice or a bpatcher file. Every
+# patch folder carries its own copies; setup/ holds the canonical files.
+M320_REF_RE = re.compile(r"^m320\.[a-z0-9-]+~?$")
+M320_CANONICAL_DIR = "setup"
 
 EXCERPT = 80
 
@@ -391,6 +397,72 @@ def check_vendor(index):
 
 
 # --------------------------------------------------------------------------- #
+# Whole-repo rule: course abstraction copies.
+# --------------------------------------------------------------------------- #
+def _m320_refs(node, out):
+    """Add every m320 abstraction name ``node`` uses to ``out``, recursing into subpatchers.
+
+    A reference is a newobj whose first word is m320.<x>, the first argument of
+    poly~, or a bpatcher whose file name is m320.<x>.maxpat.
+    """
+    if isinstance(node, dict):
+        box = node.get("box")
+        if isinstance(box, dict):
+            text = box.get("text")
+            words = text.split() if isinstance(text, str) else []
+            if box.get("maxclass") == "newobj" and words:
+                if M320_REF_RE.match(words[0]):
+                    out.add(words[0])
+                if words[0] == "poly~" and len(words) > 1 and M320_REF_RE.match(words[1]):
+                    out.add(words[1])
+            name = box.get("name")
+            if (box.get("maxclass") == "bpatcher" and isinstance(name, str)
+                    and name.startswith("m320.") and name.endswith(".maxpat")):
+                out.add(name[:-len(".maxpat")])
+        for value in node.values():
+            _m320_refs(value, out)
+    elif isinstance(node, list):
+        for value in node:
+            _m320_refs(value, out)
+    return out
+
+
+def _folder(path):
+    """The directory of a repo-relative path ("" for the repo root)."""
+    return path.rpartition("/")[0]
+
+
+def _in_folder(folder, name):
+    return folder + "/" + name if folder else name
+
+
+def check_m320(index, paths, size_cap=SIZE_CAP):
+    """m320-missing findings for the Max files in ``paths``.
+
+    Each patch folder must hold a copy of every m320 abstraction its Max files
+    use, so a patch opens with no search-path setup. Files that are not JSON
+    are left to maxpat-json; oversize files are left to the size rule.
+    """
+    failures = {}
+    for path in paths:
+        if not path.lower().endswith(MAX_SUFFIXES) or index.size(path) > size_cap:
+            continue
+        text = _text(index.read(path))
+        try:
+            doc = json.loads(text) if text is not None else None
+        except ValueError:
+            continue
+        folder = _folder(path)
+        for name in sorted(_m320_refs(doc, set())):
+            if _in_folder(folder, name + ".maxpat") not in index:
+                failures.setdefault(path, []).append((
+                    "m320-missing",
+                    f"uses {name} but {name}.maxpat is not in this folder; copy it from setup/",
+                ))
+    return failures
+
+
+# --------------------------------------------------------------------------- #
 # Modes.
 # --------------------------------------------------------------------------- #
 def _merge(into, more):
@@ -429,6 +501,7 @@ def check_tree(cwd=None, env=None, size_cap=SIZE_CAP):
     _merge(failures, check_unmerged(index))
     _merge(failures, check_media(index, paths))
     _merge(failures, check_vendor(index))
+    _merge(failures, check_m320(index, paths, size_cap))
     return failures, len(paths)
 
 
@@ -438,8 +511,9 @@ def check_staged(cwd=None, env=None, size_cap=SIZE_CAP):
     Per-file rules cover the added, copied, modified, renamed or type-changed
     paths. Every unmerged entry is a finding. The whole-repo rules rerun
     over the full index whenever their inputs change: every media file when
-    MEDIA.md is staged (or deleted), and the vendor check when VENDOR.md or
-    anything under demos/_shared/vendor/ is staged.
+    MEDIA.md is staged (or deleted), the vendor check when VENDOR.md or
+    anything under demos/_shared/vendor/ is staged, and the abstraction-copy
+    check over every Max file when any Max file is staged or deleted.
     """
     index = Index(cwd, env)
     paths = [p for p in staged_paths(cwd, env) if p in index]
@@ -450,6 +524,8 @@ def check_staged(cwd=None, env=None, size_cap=SIZE_CAP):
     _merge(failures, check_media(index, media))
     if any(p.startswith(VENDOR_DIR) for p in changed):
         _merge(failures, check_vendor(index))
+    if any(p.lower().endswith(MAX_SUFFIXES) for p in changed):
+        _merge(failures, check_m320(index, index.paths(), size_cap))
     return failures, len(paths)
 
 
@@ -503,6 +579,7 @@ def _self_test_files():
         # Never written to disk: self_test puts stage 1, 2 and 3 entries for it
         # straight into the index.
         "unmerged": ("seed/conflict.txt", b"base\n"),
+        "m320-missing": ("seed3/uses.maxpat", _patch_json(9, _box("m320.synth~")).encode("utf-8")),
     }
     control = {
         ".gitattributes": b"* text=auto eol=lf\n*.wav binary\n",
