@@ -12,8 +12,8 @@
         "rect": [
             85.0,
             104.0,
-            3359.0,
-            501.0
+            420.0,
+            260.0
         ],
         "bglocked": 0,
         "openinpresentation": 1,
@@ -532,52 +532,12 @@
                         ""
                     ],
                     "patching_rect": [
-                        560.0,
-                        60.0,
+                        560,
+                        95,
                         79.0,
                         22.0
                     ],
                     "text": "select #0",
-                    "fontname": "Arial",
-                    "fontsize": 12.0
-                }
-            },
-            {
-                "box": {
-                    "maxclass": "message",
-                    "id": "obj-21",
-                    "numinlets": 2,
-                    "numoutlets": 1,
-                    "outlettype": [
-                        ""
-                    ],
-                    "patching_rect": [
-                        560.0,
-                        95.0,
-                        44.0,
-                        22.0
-                    ],
-                    "text": "1 10",
-                    "fontname": "Arial",
-                    "fontsize": 12.0
-                }
-            },
-            {
-                "box": {
-                    "maxclass": "message",
-                    "id": "obj-22",
-                    "numinlets": 2,
-                    "numoutlets": 1,
-                    "outlettype": [
-                        ""
-                    ],
-                    "patching_rect": [
-                        625.0,
-                        95.0,
-                        44.0,
-                        22.0
-                    ],
-                    "text": "0 10",
                     "fontname": "Arial",
                     "fontsize": 12.0
                 }
@@ -593,8 +553,8 @@
                         ""
                     ],
                     "patching_rect": [
-                        560.0,
-                        130.0,
+                        690,
+                        235,
                         65.0,
                         22.0
                     ],
@@ -631,7 +591,7 @@
                     "numoutlets": 0,
                     "outlettype": [],
                     "patching_rect": [
-                        735,
+                        722,
                         62,
                         72.0,
                         20.0
@@ -826,8 +786,8 @@
                         "rect": [
                             100.0,
                             100.0,
-                            400.0,
-                            300.0
+                            320.0,
+                            390.0
                         ],
                         "bglocked": 0,
                         "openinpresentation": 0,
@@ -1110,12 +1070,8 @@
                                     "midpoints": [
                                         136.0,
                                         132.0,
-                                        144.0,
-                                        132.0,
-                                        144.0,
-                                        170.0,
                                         167.0,
-                                        170.0
+                                        132.0
                                     ]
                                 }
                             },
@@ -1149,37 +1105,9 @@
                                     ],
                                     "midpoints": [
                                         185.5,
-                                        132.0,
-                                        144.0,
-                                        132.0,
-                                        144.0,
-                                        170.0,
-                                        144.0,
-                                        167.0,
-                                        174.0,
-                                        167.0,
-                                        174.0,
-                                        205.0,
-                                        174.0,
-                                        202.0,
-                                        112.0,
-                                        202.0,
-                                        112.0,
-                                        240.0,
-                                        112.0,
-                                        237.0,
-                                        146.0,
-                                        237.0,
-                                        146.0,
-                                        275.0,
-                                        146.0,
-                                        272.0,
-                                        186.0,
-                                        272.0,
-                                        186.0,
-                                        310.0,
+                                        308.0,
                                         57.0,
-                                        310.0
+                                        308.0
                                     ]
                                 }
                             },
@@ -1275,7 +1203,25 @@
                             }
                         ],
                         "dependency_cache": [],
-                        "autosave": 0
+                        "autosave": 0,
+                        "bgcolor": [
+                            0.333,
+                            0.333,
+                            0.333,
+                            1.0
+                        ],
+                        "editing_bgcolor": [
+                            0.333,
+                            0.333,
+                            0.333,
+                            1.0
+                        ],
+                        "locked_bgcolor": [
+                            0.333,
+                            0.333,
+                            0.333,
+                            1.0
+                        ]
                     },
                     "saved_object_attributes": {
                         "description": "",
@@ -1626,19 +1572,9 @@
                                     ],
                                     "midpoints": [
                                         90.0,
-                                        22.0,
-                                        203.0,
-                                        22.0,
-                                        203.0,
-                                        60.0,
-                                        203.0,
-                                        22.0,
-                                        158.0,
-                                        22.0,
-                                        158.0,
-                                        60.0,
+                                        58.0,
                                         294.3333333333333,
-                                        60.0
+                                        58.0
                                     ]
                                 }
                             },
@@ -1654,13 +1590,9 @@
                                     ],
                                     "midpoints": [
                                         135.0,
-                                        22.0,
-                                        203.0,
-                                        22.0,
-                                        203.0,
-                                        60.0,
+                                        58.0,
                                         423.0,
-                                        60.0
+                                        58.0
                                     ]
                                 }
                             },
@@ -3024,7 +2956,7 @@
                     "numoutlets": 0,
                     "outlettype": [],
                     "patching_rect": [
-                        1262,
+                        1245,
                         62,
                         79.0,
                         20.0
@@ -3382,8 +3314,8 @@
                         "rect": [
                             100.0,
                             100.0,
-                            400.0,
-                            300.0
+                            560.0,
+                            640.0
                         ],
                         "bglocked": 0,
                         "openinpresentation": 0,
@@ -3599,8 +3531,8 @@
                                         ""
                                     ],
                                     "patching_rect": [
-                                        150.0,
-                                        175.0,
+                                        150,
+                                        210,
                                         40.0,
                                         22.0
                                     ],
@@ -3619,8 +3551,8 @@
                                         ""
                                     ],
                                     "patching_rect": [
-                                        220.0,
-                                        175.0,
+                                        235,
+                                        175,
                                         40.0,
                                         22.0
                                     ],
@@ -3957,6 +3889,26 @@
                                     "fontname": "Arial",
                                     "fontsize": 12.0
                                 }
+                            },
+                            {
+                                "box": {
+                                    "maxclass": "newobj",
+                                    "id": "obj-28",
+                                    "numinlets": 2,
+                                    "numoutlets": 1,
+                                    "outlettype": [
+                                        ""
+                                    ],
+                                    "patching_rect": [
+                                        150,
+                                        175,
+                                        73.0,
+                                        22.0
+                                    ],
+                                    "text": "delay 10",
+                                    "fontname": "Arial",
+                                    "fontsize": 12.0
+                                }
                             }
                         ],
                         "lines": [
@@ -4039,12 +3991,8 @@
                                     "midpoints": [
                                         193.0,
                                         132.0,
-                                        251.0,
-                                        132.0,
-                                        251.0,
-                                        170.0,
                                         267.0,
-                                        170.0
+                                        132.0
                                     ]
                                 }
                             },
@@ -4060,37 +4008,9 @@
                                     ],
                                     "midpoints": [
                                         280.0,
-                                        132.0,
-                                        142.0,
-                                        132.0,
-                                        142.0,
-                                        170.0,
-                                        142.0,
-                                        132.0,
-                                        137.0,
-                                        132.0,
-                                        137.0,
-                                        170.0,
-                                        137.0,
-                                        167.0,
-                                        198.0,
-                                        167.0,
-                                        198.0,
-                                        205.0,
-                                        198.0,
-                                        167.0,
-                                        212.0,
-                                        167.0,
-                                        212.0,
-                                        205.0,
-                                        212.0,
-                                        237.0,
-                                        130.0,
-                                        237.0,
-                                        130.0,
-                                        275.0,
+                                        272.0,
                                         96.5,
-                                        275.0
+                                        272.0
                                     ]
                                 }
                             },
@@ -4102,18 +4022,6 @@
                                     ],
                                     "destination": [
                                         "obj-11",
-                                        0
-                                    ]
-                                }
-                            },
-                            {
-                                "patchline": {
-                                    "source": [
-                                        "obj-8",
-                                        0
-                                    ],
-                                    "destination": [
-                                        "obj-10",
                                         0
                                     ]
                                 }
@@ -4129,32 +4037,10 @@
                                         0
                                     ],
                                     "midpoints": [
-                                        240.0,
-                                        322.0,
-                                        472.0,
-                                        322.0,
-                                        472.0,
-                                        360.0,
-                                        472.0,
-                                        322.0,
-                                        592.0,
-                                        322.0,
-                                        592.0,
-                                        360.0,
-                                        592.0,
-                                        352.0,
-                                        251.0,
-                                        352.0,
-                                        251.0,
-                                        390.0,
-                                        251.0,
+                                        255.0,
                                         357.0,
-                                        472.0,
-                                        357.0,
-                                        472.0,
-                                        395.0,
                                         607.0,
-                                        395.0
+                                        357.0
                                     ]
                                 }
                             },
@@ -4170,9 +4056,9 @@
                                     ],
                                     "midpoints": [
                                         170.0,
-                                        278.5,
+                                        296.0,
                                         196.5,
-                                        278.5
+                                        296.0
                                     ]
                                 }
                             },
@@ -4188,55 +4074,9 @@
                                     ],
                                     "midpoints": [
                                         415.0,
-                                        22.0,
-                                        88.0,
-                                        22.0,
-                                        88.0,
-                                        68.0,
-                                        88.0,
-                                        62.0,
-                                        151.0,
-                                        62.0,
-                                        151.0,
-                                        100.0,
-                                        151.0,
-                                        97.0,
-                                        244.0,
-                                        97.0,
-                                        244.0,
-                                        135.0,
-                                        244.0,
-                                        132.0,
-                                        251.0,
-                                        132.0,
-                                        251.0,
-                                        170.0,
-                                        251.0,
-                                        132.0,
-                                        252.0,
-                                        132.0,
-                                        252.0,
-                                        170.0,
-                                        252.0,
-                                        132.0,
-                                        137.0,
-                                        132.0,
-                                        137.0,
-                                        170.0,
-                                        137.0,
-                                        167.0,
-                                        198.0,
-                                        167.0,
-                                        198.0,
-                                        205.0,
-                                        198.0,
-                                        167.0,
-                                        268.0,
-                                        167.0,
-                                        268.0,
-                                        205.0,
+                                        168.0,
                                         73.0,
-                                        205.0
+                                        168.0
                                     ]
                                 }
                             },
@@ -4300,13 +4140,13 @@
                                     ],
                                     "midpoints": [
                                         115.0,
-                                        272.0,
-                                        151.0,
-                                        272.0,
-                                        151.0,
-                                        310.0,
+                                        274.0,
+                                        149.0,
+                                        274.0,
+                                        149.0,
+                                        312.0,
                                         96.5,
-                                        310.0
+                                        312.0
                                     ]
                                 }
                             },
@@ -4358,13 +4198,13 @@
                                     ],
                                     "midpoints": [
                                         57.0,
-                                        322.0,
-                                        472.0,
-                                        322.0,
-                                        472.0,
-                                        360.0,
+                                        350.0,
+                                        328.0,
+                                        350.0,
+                                        328.0,
+                                        324.0,
                                         607.0,
-                                        360.0
+                                        324.0
                                     ]
                                 }
                             },
@@ -4464,19 +4304,9 @@
                                     ],
                                     "midpoints": [
                                         406.0,
-                                        462.0,
-                                        312.0,
-                                        462.0,
-                                        312.0,
-                                        500.0,
-                                        312.0,
-                                        497.0,
-                                        312.0,
-                                        497.0,
-                                        312.0,
-                                        535.0,
+                                        464.0,
                                         257.0,
-                                        535.0
+                                        464.0
                                     ]
                                 }
                             },
@@ -4516,13 +4346,9 @@
                                     ],
                                     "midpoints": [
                                         349.0,
-                                        497.0,
-                                        309.0,
-                                        497.0,
-                                        309.0,
-                                        535.0,
+                                        533.0,
                                         257.0,
-                                        535.0
+                                        533.0
                                     ]
                                 }
                             },
@@ -4580,13 +4406,9 @@
                                     ],
                                     "midpoints": [
                                         607.0,
-                                        357.0,
-                                        553.0,
-                                        357.0,
-                                        553.0,
-                                        395.0,
+                                        392.0,
                                         515.0,
-                                        395.0
+                                        392.0
                                     ]
                                 }
                             },
@@ -4601,10 +4423,58 @@
                                         0
                                     ]
                                 }
+                            },
+                            {
+                                "patchline": {
+                                    "source": [
+                                        "obj-8",
+                                        0
+                                    ],
+                                    "destination": [
+                                        "obj-28",
+                                        0
+                                    ]
+                                }
+                            },
+                            {
+                                "patchline": {
+                                    "source": [
+                                        "obj-28",
+                                        0
+                                    ],
+                                    "destination": [
+                                        "obj-10",
+                                        0
+                                    ],
+                                    "midpoints": [
+                                        186.5,
+                                        203.5,
+                                        157.0,
+                                        203.5
+                                    ]
+                                }
                             }
                         ],
                         "dependency_cache": [],
-                        "autosave": 0
+                        "autosave": 0,
+                        "bgcolor": [
+                            0.333,
+                            0.333,
+                            0.333,
+                            1.0
+                        ],
+                        "editing_bgcolor": [
+                            0.333,
+                            0.333,
+                            0.333,
+                            1.0
+                        ],
+                        "locked_bgcolor": [
+                            0.333,
+                            0.333,
+                            0.333,
+                            1.0
+                        ]
                     },
                     "saved_object_attributes": {
                         "description": "",
@@ -4751,6 +4621,307 @@
                     "columns": 8,
                     "ignoreclick": 1
                 }
+            },
+            {
+                "box": {
+                    "maxclass": "newobj",
+                    "id": "obj-90",
+                    "numinlets": 1,
+                    "numoutlets": 2,
+                    "outlettype": [
+                        "",
+                        ""
+                    ],
+                    "patching_rect": [
+                        560,
+                        62,
+                        101.0,
+                        22.0
+                    ],
+                    "text": "route free",
+                    "fontname": "Arial",
+                    "fontsize": 12.0
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "message",
+                    "id": "obj-91",
+                    "numinlets": 2,
+                    "numoutlets": 1,
+                    "outlettype": [
+                        ""
+                    ],
+                    "patching_rect": [
+                        560,
+                        130,
+                        40.0,
+                        22.0
+                    ],
+                    "text": "1",
+                    "fontname": "Arial",
+                    "fontsize": 12.0
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "message",
+                    "id": "obj-92",
+                    "numinlets": 2,
+                    "numoutlets": 1,
+                    "outlettype": [
+                        ""
+                    ],
+                    "patching_rect": [
+                        600,
+                        130,
+                        40.0,
+                        22.0
+                    ],
+                    "text": "0",
+                    "fontname": "Arial",
+                    "fontsize": 12.0
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "newobj",
+                    "id": "obj-93",
+                    "numinlets": 1,
+                    "numoutlets": 3,
+                    "outlettype": [
+                        "",
+                        "",
+                        ""
+                    ],
+                    "patching_rect": [
+                        560,
+                        165,
+                        107.0,
+                        22.0
+                    ],
+                    "text": "trigger i i i",
+                    "fontname": "Arial",
+                    "fontsize": 12.0
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "message",
+                    "id": "obj-94",
+                    "numinlets": 2,
+                    "numoutlets": 1,
+                    "outlettype": [
+                        ""
+                    ],
+                    "patching_rect": [
+                        690,
+                        200,
+                        51.0,
+                        22.0
+                    ],
+                    "text": "$1 10",
+                    "fontname": "Arial",
+                    "fontsize": 12.0
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "newobj",
+                    "id": "obj-95",
+                    "numinlets": 1,
+                    "numoutlets": 3,
+                    "outlettype": [
+                        "",
+                        "",
+                        ""
+                    ],
+                    "patching_rect": [
+                        560,
+                        200,
+                        58.0,
+                        22.0
+                    ],
+                    "text": "change",
+                    "fontname": "Arial",
+                    "fontsize": 12.0
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "outlet",
+                    "id": "obj-96",
+                    "numinlets": 2,
+                    "numoutlets": 0,
+                    "outlettype": [],
+                    "patching_rect": [
+                        560,
+                        235,
+                        30.0,
+                        30.0
+                    ],
+                    "parameter_enable": 0,
+                    "comment": "1 while this strip plays the bus, 0 when another patch has it"
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "newobj",
+                    "id": "obj-97",
+                    "numinlets": 1,
+                    "numoutlets": 1,
+                    "outlettype": [
+                        ""
+                    ],
+                    "patching_rect": [
+                        30,
+                        290,
+                        79.0,
+                        22.0
+                    ],
+                    "text": "closebang",
+                    "fontname": "Arial",
+                    "fontsize": 12.0
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "newobj",
+                    "id": "obj-98",
+                    "numinlets": 1,
+                    "numoutlets": 2,
+                    "outlettype": [
+                        "",
+                        ""
+                    ],
+                    "patching_rect": [
+                        30,
+                        322,
+                        93.0,
+                        22.0
+                    ],
+                    "text": "trigger b b",
+                    "fontname": "Arial",
+                    "fontsize": 12.0
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "message",
+                    "id": "obj-99",
+                    "numinlets": 2,
+                    "numoutlets": 1,
+                    "outlettype": [
+                        ""
+                    ],
+                    "patching_rect": [
+                        130,
+                        322,
+                        40.0,
+                        22.0
+                    ],
+                    "text": "0",
+                    "fontname": "Arial",
+                    "fontsize": 12.0
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "newobj",
+                    "id": "obj-100",
+                    "numinlets": 2,
+                    "numoutlets": 1,
+                    "outlettype": [
+                        ""
+                    ],
+                    "patching_rect": [
+                        130,
+                        357,
+                        72.0,
+                        22.0
+                    ],
+                    "text": "gate 1 1",
+                    "fontname": "Arial",
+                    "fontsize": 12.0
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "newobj",
+                    "id": "obj-101",
+                    "numinlets": 1,
+                    "numoutlets": 1,
+                    "outlettype": [
+                        ""
+                    ],
+                    "patching_rect": [
+                        130,
+                        392,
+                        72.0,
+                        22.0
+                    ],
+                    "text": "deferlow",
+                    "fontname": "Arial",
+                    "fontsize": 12.0
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "newobj",
+                    "id": "obj-102",
+                    "numinlets": 2,
+                    "numoutlets": 1,
+                    "outlettype": [
+                        ""
+                    ],
+                    "patching_rect": [
+                        30,
+                        357,
+                        72.0,
+                        22.0
+                    ],
+                    "text": "gate 1 0",
+                    "fontname": "Arial",
+                    "fontsize": 12.0
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "message",
+                    "id": "obj-103",
+                    "numinlets": 2,
+                    "numoutlets": 1,
+                    "outlettype": [
+                        ""
+                    ],
+                    "patching_rect": [
+                        30,
+                        392,
+                        44.0,
+                        22.0
+                    ],
+                    "text": "free",
+                    "fontname": "Arial",
+                    "fontsize": 12.0
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "newobj",
+                    "id": "obj-104",
+                    "numinlets": 1,
+                    "numoutlets": 0,
+                    "outlettype": [],
+                    "patching_rect": [
+                        30,
+                        427,
+                        121.0,
+                        22.0
+                    ],
+                    "text": "send m320.claim",
+                    "fontname": "Arial",
+                    "fontsize": 12.0
+                }
             }
         ],
         "lines": [
@@ -4778,13 +4949,9 @@
                     ],
                     "midpoints": [
                         59.0,
-                        89.0,
-                        50.0,
-                        89.0,
-                        50.0,
-                        125.0,
+                        87.0,
                         42.0,
-                        125.0
+                        87.0
                     ]
                 }
             },
@@ -4800,13 +4967,9 @@
                     ],
                     "midpoints": [
                         42.0,
-                        89.0,
-                        50.0,
-                        89.0,
-                        50.0,
-                        125.0,
+                        123.0,
                         73.0,
-                        125.0
+                        123.0
                     ]
                 }
             },
@@ -4840,13 +5003,9 @@
                     ],
                     "midpoints": [
                         116.0,
-                        177.0,
-                        127.0,
-                        177.0,
-                        127.0,
-                        215.0,
+                        213.0,
                         138.0,
-                        215.0
+                        213.0
                     ]
                 }
             },
@@ -4875,12 +5034,8 @@
                     "midpoints": [
                         73.0,
                         177.0,
-                        131.0,
-                        177.0,
-                        131.0,
-                        215.0,
                         142.0,
-                        215.0
+                        177.0
                     ]
                 }
             },
@@ -4896,13 +5051,9 @@
                     ],
                     "midpoints": [
                         186.0,
-                        177.0,
-                        187.0,
-                        177.0,
-                        187.0,
-                        215.0,
+                        213.0,
                         138.0,
-                        215.0
+                        213.0
                     ]
                 }
             },
@@ -4981,82 +5132,6 @@
             {
                 "patchline": {
                     "source": [
-                        "obj-19",
-                        0
-                    ],
-                    "destination": [
-                        "obj-20",
-                        0
-                    ],
-                    "midpoints": [
-                        631.0,
-                        56.0,
-                        599.5,
-                        56.0
-                    ]
-                }
-            },
-            {
-                "patchline": {
-                    "source": [
-                        "obj-20",
-                        0
-                    ],
-                    "destination": [
-                        "obj-21",
-                        0
-                    ]
-                }
-            },
-            {
-                "patchline": {
-                    "source": [
-                        "obj-20",
-                        1
-                    ],
-                    "destination": [
-                        "obj-22",
-                        0
-                    ]
-                }
-            },
-            {
-                "patchline": {
-                    "source": [
-                        "obj-21",
-                        0
-                    ],
-                    "destination": [
-                        "obj-23",
-                        0
-                    ]
-                }
-            },
-            {
-                "patchline": {
-                    "source": [
-                        "obj-22",
-                        0
-                    ],
-                    "destination": [
-                        "obj-23",
-                        0
-                    ],
-                    "midpoints": [
-                        647.0,
-                        87.0,
-                        612.0,
-                        87.0,
-                        612.0,
-                        125.0,
-                        567.0,
-                        125.0
-                    ]
-                }
-            },
-            {
-                "patchline": {
-                    "source": [
                         "obj-24",
                         0
                     ],
@@ -5084,13 +5159,9 @@
                     ],
                     "midpoints": [
                         807.0,
-                        54.0,
-                        815.0,
-                        54.0,
-                        815.0,
-                        90.0,
+                        88.5,
                         850.0,
-                        90.0
+                        88.5
                     ]
                 }
             },
@@ -5119,12 +5190,8 @@
                     "midpoints": [
                         835.6666666666666,
                         122.0,
-                        957.0,
-                        122.0,
-                        957.0,
-                        160.0,
                         982.0,
-                        160.0
+                        122.0
                     ]
                 }
             },
@@ -5141,18 +5208,8 @@
                     "midpoints": [
                         864.3333333333334,
                         122.0,
-                        957.0,
-                        122.0,
-                        957.0,
-                        160.0,
-                        957.0,
-                        122.0,
-                        967.0,
-                        122.0,
-                        967.0,
-                        160.0,
                         1157.0,
-                        160.0
+                        122.0
                     ]
                 }
             },
@@ -5186,13 +5243,9 @@
                     ],
                     "midpoints": [
                         1049.5,
-                        122.0,
-                        957.0,
-                        122.0,
-                        957.0,
-                        160.0,
+                        158.0,
                         843.0,
-                        160.0
+                        158.0
                     ]
                 }
             },
@@ -5208,19 +5261,9 @@
                     ],
                     "midpoints": [
                         1224.5,
-                        122.0,
-                        957.0,
-                        122.0,
-                        957.0,
-                        160.0,
-                        957.0,
-                        122.0,
-                        967.0,
-                        122.0,
-                        967.0,
-                        160.0,
+                        158.0,
                         843.0,
-                        160.0
+                        158.0
                     ]
                 }
             },
@@ -5260,13 +5303,9 @@
                     ],
                     "midpoints": [
                         580.1428571428571,
-                        687.0,
-                        578.0,
-                        687.0,
-                        578.0,
-                        743.0,
+                        683.0,
                         572.0,
-                        743.0
+                        683.0
                     ]
                 }
             },
@@ -5282,13 +5321,9 @@
                     ],
                     "midpoints": [
                         606.7142857142858,
-                        687.0,
-                        600.0,
-                        687.0,
-                        600.0,
-                        743.0,
+                        683.0,
                         594.0,
-                        743.0
+                        683.0
                     ]
                 }
             },
@@ -5304,13 +5339,9 @@
                     ],
                     "midpoints": [
                         633.2857142857143,
-                        687.0,
-                        622.0,
-                        687.0,
-                        622.0,
-                        743.0,
+                        683.0,
                         616.0,
-                        743.0
+                        683.0
                     ]
                 }
             },
@@ -5326,13 +5357,9 @@
                     ],
                     "midpoints": [
                         659.8571428571429,
-                        687.0,
-                        644.0,
-                        687.0,
-                        644.0,
-                        743.0,
+                        683.0,
                         638.0,
-                        743.0
+                        683.0
                     ]
                 }
             },
@@ -5348,13 +5375,9 @@
                     ],
                     "midpoints": [
                         686.4285714285714,
-                        687.0,
-                        666.0,
-                        687.0,
-                        666.0,
-                        743.0,
+                        683.0,
                         660.0,
-                        743.0
+                        683.0
                     ]
                 }
             },
@@ -5388,13 +5411,13 @@
                     ],
                     "midpoints": [
                         527.0,
-                        687.0,
-                        512.0,
-                        687.0,
-                        512.0,
-                        743.0,
+                        683.0,
+                        514.0,
+                        683.0,
+                        514.0,
+                        747.0,
                         527.0,
-                        743.0
+                        747.0
                     ]
                 }
             },
@@ -5410,49 +5433,9 @@
                     ],
                     "midpoints": [
                         553.5714285714286,
-                        687.0,
-                        566.0,
-                        687.0,
-                        566.0,
-                        743.0,
-                        566.0,
-                        687.0,
-                        588.0,
-                        687.0,
-                        588.0,
-                        743.0,
-                        588.0,
-                        687.0,
-                        610.0,
-                        687.0,
-                        610.0,
-                        743.0,
-                        610.0,
-                        687.0,
-                        632.0,
-                        687.0,
-                        632.0,
-                        743.0,
-                        632.0,
-                        687.0,
-                        622.0,
-                        687.0,
-                        622.0,
-                        743.0,
-                        622.0,
-                        687.0,
-                        644.0,
-                        687.0,
-                        644.0,
-                        743.0,
-                        644.0,
-                        687.0,
-                        666.0,
-                        687.0,
-                        666.0,
-                        743.0,
+                        683.0,
                         713.0,
-                        743.0
+                        683.0
                     ]
                 }
             },
@@ -5569,14 +5552,14 @@
                         1
                     ],
                     "midpoints": [
-                        567.0,
-                        292.0,
-                        492.0,
-                        292.0,
-                        492.0,
-                        330.0,
+                        697.0,
+                        265.0,
+                        646.0,
+                        265.0,
+                        646.0,
+                        339.0,
                         544.0,
-                        330.0
+                        339.0
                     ]
                 }
             },
@@ -5591,20 +5574,14 @@
                         1
                     ],
                     "midpoints": [
-                        567.0,
-                        292.0,
-                        650.0,
-                        292.0,
-                        650.0,
-                        330.0,
-                        650.0,
-                        292.0,
-                        642.0,
-                        292.0,
-                        642.0,
-                        330.0,
+                        697.0,
+                        265.0,
+                        646.0,
+                        265.0,
+                        646.0,
+                        339.0,
                         694.0,
-                        330.0
+                        339.0
                     ]
                 }
             },
@@ -5620,13 +5597,9 @@
                     ],
                     "midpoints": [
                         525.5,
-                        337.0,
-                        499.0,
-                        337.0,
-                        499.0,
-                        375.0,
+                        373.0,
                         422.3333333333333,
-                        375.0
+                        373.0
                     ]
                 }
             },
@@ -5642,13 +5615,9 @@
                     ],
                     "midpoints": [
                         675.5,
-                        337.0,
-                        559.0,
-                        337.0,
-                        559.0,
-                        375.0,
+                        373.0,
                         537.6666666666666,
-                        375.0
+                        373.0
                     ]
                 }
             },
@@ -5682,49 +5651,9 @@
                     ],
                     "midpoints": [
                         843.0,
-                        292.0,
-                        650.0,
-                        292.0,
-                        650.0,
-                        330.0,
-                        650.0,
-                        292.0,
-                        642.0,
-                        292.0,
-                        642.0,
-                        330.0,
-                        642.0,
-                        337.0,
-                        559.0,
-                        337.0,
-                        559.0,
-                        375.0,
-                        559.0,
-                        337.0,
-                        642.0,
-                        337.0,
-                        642.0,
-                        375.0,
-                        642.0,
-                        337.0,
-                        499.0,
-                        337.0,
-                        499.0,
-                        375.0,
-                        499.0,
-                        387.0,
-                        668.0,
-                        387.0,
-                        668.0,
-                        425.0,
-                        668.0,
-                        432.0,
-                        692.0,
-                        432.0,
-                        692.0,
-                        470.0,
+                        421.0,
                         371.0,
-                        470.0
+                        421.0
                     ]
                 }
             },
@@ -5776,55 +5705,13 @@
                     ],
                     "midpoints": [
                         55.5,
-                        217.0,
-                        189.0,
-                        217.0,
-                        189.0,
-                        255.0,
-                        189.0,
-                        252.0,
-                        224.0,
-                        252.0,
-                        224.0,
-                        290.0,
-                        224.0,
-                        292.0,
-                        292.0,
-                        292.0,
-                        292.0,
-                        338.0,
-                        292.0,
-                        337.0,
-                        292.0,
-                        337.0,
-                        292.0,
-                        375.0,
-                        292.0,
-                        387.0,
-                        292.0,
-                        387.0,
-                        292.0,
-                        425.0,
-                        292.0,
-                        432.0,
-                        292.0,
-                        432.0,
-                        292.0,
-                        470.0,
-                        292.0,
-                        470.0,
-                        298.0,
-                        470.0,
-                        298.0,
-                        534.0,
-                        298.0,
-                        477.0,
-                        292.0,
-                        477.0,
-                        292.0,
-                        515.0,
+                        253.0,
+                        294.0,
+                        253.0,
+                        294.0,
+                        537.0,
                         388.5,
-                        515.0
+                        537.0
                     ]
                 }
             },
@@ -5840,55 +5727,13 @@
                     ],
                     "midpoints": [
                         157.0,
-                        217.0,
-                        189.0,
-                        217.0,
-                        189.0,
-                        255.0,
-                        189.0,
-                        252.0,
-                        224.0,
-                        252.0,
-                        224.0,
-                        290.0,
-                        224.0,
-                        292.0,
-                        292.0,
-                        292.0,
-                        292.0,
-                        338.0,
-                        292.0,
-                        337.0,
-                        292.0,
-                        337.0,
-                        292.0,
-                        375.0,
-                        292.0,
-                        387.0,
-                        292.0,
-                        387.0,
-                        292.0,
-                        425.0,
-                        292.0,
-                        432.0,
-                        292.0,
-                        432.0,
-                        292.0,
-                        470.0,
-                        292.0,
-                        470.0,
-                        298.0,
-                        470.0,
-                        298.0,
-                        534.0,
-                        298.0,
-                        477.0,
-                        292.0,
-                        477.0,
-                        292.0,
-                        515.0,
+                        213.0,
+                        294.0,
+                        213.0,
+                        294.0,
+                        537.0,
                         388.5,
-                        515.0
+                        537.0
                     ]
                 }
             },
@@ -5904,37 +5749,9 @@
                     ],
                     "midpoints": [
                         653.0,
-                        477.0,
-                        872.0,
-                        477.0,
-                        872.0,
-                        515.0,
-                        872.0,
-                        477.0,
-                        872.0,
-                        477.0,
-                        872.0,
-                        515.0,
-                        872.0,
-                        522.0,
-                        948.0,
-                        522.0,
-                        948.0,
-                        560.0,
-                        948.0,
-                        567.0,
-                        908.0,
-                        567.0,
-                        908.0,
-                        605.0,
-                        908.0,
-                        567.0,
-                        952.0,
-                        567.0,
-                        952.0,
-                        605.0,
+                        603.0,
                         1007.0,
-                        605.0
+                        603.0
                     ]
                 }
             },
@@ -5968,13 +5785,9 @@
                     ],
                     "midpoints": [
                         1032.5,
-                        754.0,
-                        1022.0,
-                        754.0,
-                        1022.0,
-                        790.0,
+                        752.0,
                         1012.0,
-                        790.0
+                        752.0
                     ]
                 }
             },
@@ -6068,13 +5881,9 @@
                     ],
                     "midpoints": [
                         707.0,
-                        567.0,
-                        908.0,
-                        567.0,
-                        908.0,
-                        605.0,
+                        560.0,
                         967.0,
-                        605.0
+                        560.0
                     ]
                 }
             },
@@ -6090,13 +5899,9 @@
                     ],
                     "midpoints": [
                         820.0,
-                        567.0,
-                        908.0,
-                        567.0,
-                        908.0,
-                        605.0,
+                        560.0,
                         1025.0,
-                        605.0
+                        560.0
                     ]
                 }
             },
@@ -6142,13 +5947,9 @@
                     ],
                     "midpoints": [
                         307.0,
-                        537.0,
-                        485.0,
-                        537.0,
-                        485.0,
-                        575.0,
+                        513.0,
                         527.0,
-                        575.0
+                        513.0
                     ]
                 }
             },
@@ -6212,103 +6013,13 @@
                     ],
                     "midpoints": [
                         320.0,
-                        292.0,
-                        338.0,
-                        292.0,
-                        338.0,
-                        338.0,
-                        338.0,
-                        292.0,
-                        492.0,
-                        292.0,
-                        492.0,
-                        330.0,
-                        492.0,
-                        337.0,
-                        492.0,
-                        337.0,
-                        492.0,
-                        375.0,
-                        492.0,
-                        337.0,
-                        499.0,
-                        337.0,
-                        499.0,
-                        375.0,
-                        499.0,
-                        387.0,
-                        292.0,
-                        387.0,
-                        292.0,
-                        425.0,
-                        292.0,
-                        432.0,
-                        450.0,
-                        432.0,
-                        450.0,
-                        470.0,
-                        450.0,
-                        477.0,
-                        292.0,
-                        477.0,
-                        292.0,
-                        515.0,
-                        292.0,
-                        537.0,
-                        485.0,
-                        537.0,
-                        485.0,
-                        575.0,
-                        485.0,
-                        612.0,
-                        512.0,
-                        612.0,
-                        512.0,
-                        650.0,
-                        512.0,
-                        647.0,
-                        512.0,
-                        647.0,
-                        512.0,
-                        685.0,
-                        512.0,
-                        687.0,
-                        512.0,
-                        687.0,
-                        512.0,
-                        743.0,
-                        512.0,
-                        687.0,
-                        534.0,
-                        687.0,
-                        534.0,
-                        743.0,
-                        534.0,
-                        687.0,
-                        556.0,
-                        687.0,
-                        556.0,
-                        743.0,
-                        556.0,
-                        747.0,
-                        512.0,
-                        747.0,
-                        512.0,
-                        803.0,
-                        512.0,
-                        802.0,
-                        512.0,
-                        802.0,
-                        512.0,
-                        840.0,
-                        512.0,
-                        837.0,
-                        512.0,
-                        837.0,
-                        512.0,
-                        875.0,
+                        193.0,
+                        296.0,
+                        193.0,
+                        296.0,
+                        873.0,
                         566.5,
-                        875.0
+                        873.0
                     ]
                 }
             },
@@ -6323,9 +6034,9 @@
                         0
                     ],
                     "midpoints": [
-                        1798.0,
+                        1806.0,
                         907.0,
-                        1798.0,
+                        1806.0,
                         522.0,
                         707.0,
                         522.0
@@ -6343,9 +6054,9 @@
                         0
                     ],
                     "midpoints": [
-                        1790.0,
+                        1798.0,
                         907.0,
-                        1790.0,
+                        1798.0,
                         477.0,
                         480.0,
                         477.0
@@ -6382,19 +6093,9 @@
                     ],
                     "midpoints": [
                         933.0,
-                        567.0,
-                        952.0,
-                        567.0,
-                        952.0,
-                        605.0,
-                        952.0,
-                        612.0,
-                        992.0,
-                        612.0,
-                        992.0,
-                        650.0,
+                        646.0,
                         1040.5,
-                        650.0
+                        646.0
                     ]
                 }
             },
@@ -6440,13 +6141,9 @@
                     ],
                     "midpoints": [
                         1337.0,
-                        54.0,
-                        1349.0,
-                        54.0,
-                        1349.0,
-                        90.0,
+                        88.5,
                         1383.5,
-                        90.0
+                        88.5
                     ]
                 }
             },
@@ -6463,12 +6160,8 @@
                     "midpoints": [
                         1430.0,
                         122.0,
-                        1445.0,
-                        122.0,
-                        1445.0,
-                        160.0,
                         1477.0,
-                        160.0
+                        122.0
                     ]
                 }
             },
@@ -6485,12 +6178,8 @@
                     "midpoints": [
                         1383.5,
                         122.0,
-                        1382.0,
-                        122.0,
-                        1382.0,
-                        160.0,
                         1407.0,
-                        160.0
+                        122.0
                     ]
                 }
             },
@@ -6518,115 +6207,13 @@
                     ],
                     "midpoints": [
                         1502.5,
-                        122.0,
-                        957.0,
-                        122.0,
-                        957.0,
-                        160.0,
-                        957.0,
-                        122.0,
-                        1132.0,
-                        122.0,
-                        1132.0,
-                        160.0,
-                        1132.0,
-                        122.0,
-                        1142.0,
-                        122.0,
-                        1142.0,
-                        160.0,
-                        1142.0,
-                        122.0,
-                        1322.0,
-                        122.0,
-                        1322.0,
-                        160.0,
-                        1322.0,
-                        122.0,
-                        1392.0,
-                        122.0,
-                        1392.0,
-                        160.0,
-                        1392.0,
-                        157.0,
-                        1322.0,
-                        157.0,
-                        1322.0,
-                        195.0,
-                        1322.0,
-                        157.0,
-                        1422.0,
-                        157.0,
-                        1422.0,
-                        195.0,
-                        1422.0,
-                        167.0,
-                        894.0,
-                        167.0,
-                        894.0,
-                        205.0,
-                        894.0,
-                        187.0,
-                        1402.0,
-                        187.0,
-                        1402.0,
-                        225.0,
-                        1402.0,
-                        217.0,
-                        1322.0,
-                        217.0,
-                        1322.0,
-                        257.0,
-                        1322.0,
-                        217.0,
-                        1402.0,
-                        217.0,
-                        1402.0,
-                        255.0,
-                        1402.0,
-                        219.0,
-                        1350.0,
-                        219.0,
-                        1350.0,
-                        255.0,
-                        1350.0,
-                        257.0,
-                        1322.0,
-                        257.0,
-                        1322.0,
-                        295.0,
-                        1322.0,
-                        292.0,
+                        158.0,
+                        1144.0,
+                        158.0,
+                        1144.0,
+                        434.0,
                         800.0,
-                        292.0,
-                        800.0,
-                        330.0,
-                        800.0,
-                        297.0,
-                        1322.0,
-                        297.0,
-                        1322.0,
-                        335.0,
-                        1322.0,
-                        332.0,
-                        1322.0,
-                        332.0,
-                        1322.0,
-                        370.0,
-                        1322.0,
-                        332.0,
-                        1402.0,
-                        332.0,
-                        1402.0,
-                        396.0,
-                        1402.0,
-                        332.0,
-                        1482.0,
-                        332.0,
-                        1482.0,
-                        364.0,
-                        800.0,
-                        364.0
+                        434.0
                     ]
                 }
             },
@@ -6643,12 +6230,8 @@
                     "midpoints": [
                         1418.5,
                         157.0,
-                        1431.0,
-                        157.0,
-                        1431.0,
-                        195.0,
                         1437.0,
-                        195.0
+                        157.0
                     ]
                 }
             },
@@ -6664,103 +6247,9 @@
                     ],
                     "midpoints": [
                         1476.5,
-                        157.0,
-                        1322.0,
-                        157.0,
-                        1322.0,
-                        195.0,
-                        1322.0,
-                        167.0,
-                        894.0,
-                        167.0,
-                        894.0,
-                        205.0,
-                        894.0,
-                        187.0,
-                        1402.0,
-                        187.0,
-                        1402.0,
-                        225.0,
-                        1402.0,
-                        217.0,
-                        1322.0,
-                        217.0,
-                        1322.0,
-                        257.0,
-                        1322.0,
-                        217.0,
-                        1402.0,
-                        217.0,
-                        1402.0,
-                        255.0,
-                        1402.0,
-                        219.0,
-                        1350.0,
-                        219.0,
-                        1350.0,
-                        255.0,
-                        1350.0,
-                        257.0,
-                        1322.0,
-                        257.0,
-                        1322.0,
-                        295.0,
-                        1322.0,
-                        292.0,
-                        800.0,
-                        292.0,
-                        800.0,
-                        330.0,
-                        800.0,
-                        297.0,
-                        1322.0,
-                        297.0,
-                        1322.0,
-                        335.0,
-                        1322.0,
-                        332.0,
-                        1322.0,
-                        332.0,
-                        1322.0,
-                        370.0,
-                        1322.0,
-                        332.0,
-                        1402.0,
-                        332.0,
-                        1402.0,
-                        396.0,
-                        1402.0,
-                        337.0,
-                        709.0,
-                        337.0,
-                        709.0,
-                        375.0,
-                        709.0,
-                        432.0,
-                        908.0,
-                        432.0,
-                        908.0,
-                        470.0,
-                        908.0,
-                        442.0,
-                        1322.0,
-                        442.0,
-                        1322.0,
-                        648.0,
-                        1322.0,
-                        477.0,
-                        872.0,
-                        477.0,
-                        872.0,
-                        515.0,
-                        872.0,
-                        477.0,
-                        1052.0,
-                        477.0,
-                        1052.0,
-                        515.0,
+                        358.5,
                         707.0,
-                        515.0
+                        358.5
                     ]
                 }
             },
@@ -6788,103 +6277,13 @@
                     ],
                     "midpoints": [
                         1376.5,
-                        167.0,
-                        894.0,
-                        167.0,
-                        894.0,
-                        205.0,
-                        894.0,
-                        217.0,
-                        1322.0,
-                        217.0,
-                        1322.0,
-                        257.0,
-                        1322.0,
-                        219.0,
-                        1350.0,
-                        219.0,
-                        1350.0,
-                        255.0,
-                        1350.0,
-                        257.0,
-                        1322.0,
-                        257.0,
-                        1322.0,
-                        295.0,
-                        1322.0,
-                        292.0,
-                        650.0,
-                        292.0,
-                        650.0,
-                        330.0,
-                        650.0,
-                        292.0,
-                        800.0,
-                        292.0,
-                        800.0,
-                        330.0,
-                        800.0,
-                        297.0,
-                        1322.0,
-                        297.0,
-                        1322.0,
-                        335.0,
-                        1322.0,
-                        332.0,
-                        1322.0,
-                        332.0,
-                        1322.0,
-                        370.0,
-                        1322.0,
-                        337.0,
-                        559.0,
-                        337.0,
-                        559.0,
-                        375.0,
-                        559.0,
-                        337.0,
-                        709.0,
-                        337.0,
-                        709.0,
-                        375.0,
-                        709.0,
-                        337.0,
-                        499.0,
-                        337.0,
-                        499.0,
-                        375.0,
-                        499.0,
-                        387.0,
-                        668.0,
-                        387.0,
-                        668.0,
-                        425.0,
-                        668.0,
-                        432.0,
-                        908.0,
-                        432.0,
-                        908.0,
-                        470.0,
-                        908.0,
-                        442.0,
-                        1322.0,
-                        442.0,
-                        1322.0,
-                        648.0,
-                        1322.0,
-                        477.0,
-                        872.0,
-                        477.0,
-                        872.0,
-                        515.0,
-                        872.0,
-                        477.0,
-                        872.0,
-                        477.0,
-                        872.0,
-                        515.0,
+                        193.0,
+                        946.0,
+                        193.0,
+                        946.0,
+                        479.0,
                         480.0,
-                        515.0
+                        479.0
                     ]
                 }
             },
@@ -6984,25 +6383,9 @@
                     ],
                     "midpoints": [
                         1359.0,
-                        337.0,
-                        559.0,
-                        337.0,
-                        559.0,
-                        375.0,
-                        559.0,
-                        337.0,
-                        709.0,
-                        337.0,
-                        709.0,
-                        375.0,
-                        709.0,
-                        337.0,
-                        499.0,
-                        337.0,
-                        499.0,
-                        375.0,
+                        373.0,
                         307.0,
-                        375.0
+                        373.0
                     ]
                 }
             },
@@ -7018,31 +6401,13 @@
                     ],
                     "midpoints": [
                         1387.0,
-                        254.0,
-                        1522.0,
-                        254.0,
-                        1522.0,
-                        304.0,
-                        1522.0,
-                        297.0,
-                        1431.0,
-                        297.0,
-                        1431.0,
-                        335.0,
-                        1431.0,
-                        332.0,
-                        1396.0,
-                        332.0,
-                        1396.0,
-                        370.0,
-                        1396.0,
-                        332.0,
-                        1474.0,
-                        332.0,
-                        1474.0,
-                        396.0,
+                        294.0,
+                        1472.0,
+                        294.0,
+                        1472.0,
+                        336.0,
                         1570.0,
-                        396.0
+                        336.0
                     ]
                 }
             },
@@ -7058,37 +6423,341 @@
                     ],
                     "midpoints": [
                         1437.0,
-                        292.0,
-                        800.0,
-                        292.0,
-                        800.0,
-                        330.0,
-                        800.0,
-                        297.0,
-                        1322.0,
-                        297.0,
-                        1322.0,
-                        335.0,
-                        1322.0,
-                        332.0,
-                        1322.0,
-                        332.0,
-                        1322.0,
-                        370.0,
-                        1322.0,
-                        332.0,
-                        1402.0,
-                        332.0,
-                        1402.0,
-                        396.0,
-                        1402.0,
-                        337.0,
-                        709.0,
-                        337.0,
-                        709.0,
-                        375.0,
+                        294.0,
+                        1050.0,
+                        294.0,
+                        1050.0,
+                        387.0,
                         653.0,
-                        375.0
+                        387.0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-19",
+                        0
+                    ],
+                    "destination": [
+                        "obj-90",
+                        0
+                    ],
+                    "midpoints": [
+                        631.0,
+                        57.0,
+                        610.5,
+                        57.0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-90",
+                        1
+                    ],
+                    "destination": [
+                        "obj-20",
+                        0
+                    ],
+                    "midpoints": [
+                        654.0,
+                        89.5,
+                        599.5,
+                        89.5
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-20",
+                        0
+                    ],
+                    "destination": [
+                        "obj-91",
+                        0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-20",
+                        1
+                    ],
+                    "destination": [
+                        "obj-92",
+                        0
+                    ],
+                    "midpoints": [
+                        632.0,
+                        122.0,
+                        607.0,
+                        122.0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-91",
+                        0
+                    ],
+                    "destination": [
+                        "obj-93",
+                        0
+                    ],
+                    "midpoints": [
+                        580.0,
+                        157.0,
+                        613.5,
+                        157.0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-92",
+                        0
+                    ],
+                    "destination": [
+                        "obj-93",
+                        0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-93",
+                        2
+                    ],
+                    "destination": [
+                        "obj-94",
+                        0
+                    ],
+                    "midpoints": [
+                        660.0,
+                        193.5,
+                        697.0,
+                        193.5
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-94",
+                        0
+                    ],
+                    "destination": [
+                        "obj-23",
+                        0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-93",
+                        0
+                    ],
+                    "destination": [
+                        "obj-95",
+                        0
+                    ],
+                    "midpoints": [
+                        567.0,
+                        193.5,
+                        589.0,
+                        193.5
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-95",
+                        0
+                    ],
+                    "destination": [
+                        "obj-96",
+                        0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-97",
+                        0
+                    ],
+                    "destination": [
+                        "obj-98",
+                        0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-98",
+                        1
+                    ],
+                    "destination": [
+                        "obj-99",
+                        0
+                    ],
+                    "midpoints": [
+                        116.0,
+                        333.0,
+                        137.0,
+                        333.0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-99",
+                        0
+                    ],
+                    "destination": [
+                        "obj-100",
+                        0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-90",
+                        0
+                    ],
+                    "destination": [
+                        "obj-100",
+                        1
+                    ],
+                    "midpoints": [
+                        567.0,
+                        88.0,
+                        954.0,
+                        88.0,
+                        954.0,
+                        339.0,
+                        195.0,
+                        339.0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-100",
+                        0
+                    ],
+                    "destination": [
+                        "obj-101",
+                        0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-101",
+                        0
+                    ],
+                    "destination": [
+                        "obj-11",
+                        0
+                    ],
+                    "midpoints": [
+                        1790.0,
+                        419.0,
+                        1790.0,
+                        217.0,
+                        138.0,
+                        217.0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-93",
+                        1
+                    ],
+                    "destination": [
+                        "obj-102",
+                        0
+                    ],
+                    "midpoints": [
+                        613.5,
+                        193.0,
+                        296.0,
+                        193.0,
+                        296.0,
+                        351.0,
+                        37.0,
+                        351.0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-98",
+                        0
+                    ],
+                    "destination": [
+                        "obj-102",
+                        1
+                    ],
+                    "midpoints": [
+                        37.0,
+                        350.5,
+                        95.0,
+                        350.5
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-102",
+                        0
+                    ],
+                    "destination": [
+                        "obj-103",
+                        0
+                    ],
+                    "midpoints": [
+                        66.0,
+                        385.5,
+                        37.0,
+                        385.5
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-103",
+                        0
+                    ],
+                    "destination": [
+                        "obj-104",
+                        0
+                    ],
+                    "midpoints": [
+                        52.0,
+                        420.5,
+                        90.5,
+                        420.5
                     ]
                 }
             }
